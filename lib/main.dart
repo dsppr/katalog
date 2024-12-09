@@ -3,7 +3,7 @@ import 'views/login.dart';
 import 'views/catalog.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),
-        '/catalog': (context) => CatalogPage(),
+        '/catalog': (context) => const CatalogPage(),
       },
     );
   }
