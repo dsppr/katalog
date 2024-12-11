@@ -22,4 +22,6 @@ flutter:
 
   # Tambahkan aset di bagian ini
   assets:
-    - assets/images/
+    - assets/images/image1.png
+    - assets/images/image2.png
+    - assets/images/image3.png

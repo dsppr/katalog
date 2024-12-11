@@ -9,33 +9,25 @@ class CatalogPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Catalog'),
       ),
-      body: GridView.builder(
+      body: GridView.count(
+        crossAxisCount: 2, // Two images per row
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
         padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-        ),
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 4,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Image.asset(
-                    'assets/images/img${index + 1}.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Item ${index + 1}'),
-                ),
-              ],
-            ),
-          );
-        },
+        children: [
+          Image.asset(
+            'assets/images/image1.png',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'assets/images/image2.png',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'assets/images/image3.png',
+            fit: BoxFit.cover,
+          ),
+        ],
       ),
     );
   }
