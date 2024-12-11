@@ -20,7 +20,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # Tambahkan aset di bagian ini
   assets:
     - assets/images/image1.png
     - assets/images/image2.png

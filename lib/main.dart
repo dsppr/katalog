@@ -15,11 +15,15 @@ class MyApp extends StatelessWidget {
       title: 'Mobile Programming',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: const TextTheme(
+        bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        bodyMedium: TextStyle(fontSize: 14),
+      ),
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),
-        '/catalog': (context) => const CatalogPage(),
+        '/catalog': (context) => CatalogPage(),
       },
     );
   }
