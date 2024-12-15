@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        bodyMedium: TextStyle(fontSize: 14),
-      ),
+          bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          bodyMedium: TextStyle(fontSize: 14),
+        ),
       ),
       initialRoute: '/',
       routes: {
