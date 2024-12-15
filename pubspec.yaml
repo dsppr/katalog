@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +25,5 @@ flutter:
     - assets/images/image1.png
     - assets/images/image2.png
     - assets/images/image3.png
+    - assets/images/image4.png
+    - assets/images/image5.png
