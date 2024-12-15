@@ -1,31 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 
-class CatalogPage extends StatefulWidget {
-  const CatalogPage({super.key});
-
-  @override
-  State<CatalogPage> createState() => _CatalogPageState();
-}
-
-class _CatalogPageState extends State<CatalogPage> {
+class CatalogPage extends StatelessWidget {
   final List<String> _images = [
     'assets/images/image1.png',
     'assets/images/image2.png',
     'assets/images/image3.png',
-    'assets/images/image4.png',
-    'assets/images/image5.png',
   ];
 
-  Future<void> _uploadImage() async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.image);
-
-    if (result != null && result.files.single.path != null) {
-      setState(() {
-        _images.add(result.files.single.path!);
-      });
-    }
-  }
+  CatalogPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +17,7 @@ class _CatalogPageState extends State<CatalogPage> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF003366), Color(0xFF005F99)],
+            colors: [Color(0xFF243748), Color(0xFF4B749F)], // Warna baru
           ),
         ),
         child: SafeArea(
@@ -49,15 +31,31 @@ class _CatalogPageState extends State<CatalogPage> {
               ),
               itemCount: _images.length,
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Image.asset(
-                    _images[index],
-                    fit: BoxFit.cover,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            FullScreenImage(imagePath: _images[index]),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    elevation: 4,
+                    shadowColor:
+                        Colors.black.withOpacity(0.2), // Shadow lebih lembut
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Hero(
+                      tag: _images[index], // Animasi transisi Hero
+                      child: Image.asset(
+                        _images[index],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 );
               },
@@ -65,10 +63,31 @@ class _CatalogPageState extends State<CatalogPage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _uploadImage,
-        backgroundColor: const Color(0xFF003366),
-        child: const Icon(Icons.add, color: Colors.white),
+    );
+  }
+}
+
+class FullScreenImage extends StatelessWidget {
+  final String imagePath;
+
+  const FullScreenImage({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black, // Background fullscreen
+      body: Center(
+        child: Hero(
+          tag: imagePath,
+          child: InteractiveViewer(
+            // Membuat gambar dapat di zoom secara interaktif
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit
+                  .contain, // Menjaga aspek rasio gambar agar tidak stretch
+            ),
+          ),
+        ),
       ),
     );
   }

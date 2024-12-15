@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),
-        '/catalog': (context) => const CatalogPage(),
+        '/catalog': (context) => CatalogPage(),
       },
     );
   }

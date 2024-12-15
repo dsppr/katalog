@@ -15,69 +15,88 @@ class LoginPage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF003366),
-              Color(0xFF005F99)
-            ], // Gradient lebih gelap
+              Color(0xFF243748),
+              Color(0xFF4B749F)
+            ], // Warna gradient baru
           ),
         ),
         child: Center(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   'Photo Catalog',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white, // Warna teks kontras dengan background
                   ),
-                ),
-                const SizedBox(height: 40),
-                TextField(
-                  controller: _usernameController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                  ),
-                  textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: 20),
                 TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    labelStyle: const TextStyle(color: Colors.white70),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white54),
+                    ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white54),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                   ),
+                  style: const TextStyle(color: Colors.white),
+                  textInputAction: TextInputAction.next,
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: const TextStyle(color: Colors.white70),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white54),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white54),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  style: const TextStyle(color: Colors.white),
                   textInputAction: TextInputAction.done,
                   onSubmitted: (_) {
-                    _handleLogin(context); // Handle "Enter" event
+                    _handleLogin(context);
                   },
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    _handleLogin(context);
-                  },
+                  onPressed: () => _handleLogin(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color(0xFF003366),
+                    backgroundColor:
+                        const Color(0xFF4B749F), // Tombol lebih selaras
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 40,
+                    ),
                   ),
                   child: const Text('Login'),
                 ),
@@ -93,11 +112,14 @@ class LoginPage extends StatelessWidget {
     final username = _usernameController.text.trim();
     final password = _passwordController.text.trim();
 
-    if (username == 'pengguna' && password == 'masuk') {
+    if (username.isNotEmpty && password.isNotEmpty) {
       Navigator.pushNamed(context, '/catalog');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Username atau Password salah')),
+        const SnackBar(
+          content: Text('Please enter both username and password'),
+          backgroundColor: Colors.redAccent,
+        ),
       );
     }
   }
